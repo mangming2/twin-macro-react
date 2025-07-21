@@ -2,12 +2,16 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import tw from 'twin.macro'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+      <StyledDiv>
+        I am Styled Div
+      </StyledDiv>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -31,5 +35,8 @@ function App() {
     </>
   )
 }
+
+const StyledDiv = tw.div`bg-red-500 text-white p-4`
+
 
 export default App
