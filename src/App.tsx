@@ -5,8 +5,6 @@ import { css } from '@emotion/react'
 
 function App() {
   const isActive = true
-  const variant = 'primary'
-
   return (
     <Wrapper>
         {/* 기본적인 스타일링 */}
@@ -16,34 +14,22 @@ function App() {
 
         {/* 조건부 스타일링 */}
         <ConditionalDiv isActive={isActive}>
-          조건부 스타일링 (활성화됨)
+          조건부 스타일링 (활성화됨) <br/>
+          tw태그는 정적변환만 가능하므로
+          정적 스타일링은 tw , 동적/조건부 스타일링은 styled를 사용하는 것이 권장패턴턴
         </ConditionalDiv>
 
         {/* 반응형 디자인 */}
         <ResponsiveCard>
             <div>화면 크기에 따라 레이아웃이 자동으로 조정됩니다.</div>
             <div>모바일에서는 세로로, 데스크톱에서는 가로로 배치됩니다.</div>
+            <div>Tailwind의 기본 반응형 브레이크포인트를 사용 가능합니다.</div>
         </ResponsiveCard>
 
         {/* 호버 효과와 애니메이션 */}
         <HoverButton>
           호버해보세요! 🎯
         </HoverButton>
-
-        {/* 복합 스타일링 */}
-        <ComplexCard variant={variant}>
-          <div>
-            <div>복합 스타일링</div>
-            <div>New</div>
-          </div>
-          <div>
-            twin.macro를 사용하면 복잡한 스타일링도 깔끔하게 관리할 수 있습니다.
-          </div>
-          <div>
-            <ActionButton>확인</ActionButton>
-            <ActionButton variant="secondary">취소</ActionButton>
-          </div>
-        </ComplexCard>
 
         {/* 그리드 레이아웃 */}
         <GridContainer>
@@ -53,36 +39,34 @@ function App() {
           <GridItem>아이템 4</GridItem>
         </GridContainer>
 
-        {/* 커스텀 스타일링 */}
-        <CustomStyledDiv>
-          <span tw="text-2xl font-bold text-blue-600">🎨</span>
-          <span tw="ml-2">커스텀 스타일링 예제</span>
-        </CustomStyledDiv>
+        {/* 커스텀 색상 팔레트 예제 */}
+        <CustomColorPalette>
+            <ColorPrimary />
+            <ColorSecondary />
+            <ColorBrand />
+            <ColorSuccess />
+
+            <div tw="text-center mt-4">
+            <h3 tw="text-lg font-display font-bold text-primary-700">커스텀 색상</h3>
+            <p tw="text-primary-600 text-sm">tailwind.config.js에서 정의한 색상들</p>
+          </div>
+        </CustomColorPalette>
+
+        {/* 커스텀 애니메이션 예제 */}
+        <CustomAnimationCard>
+          <div tw="flex items-center justify-center space-x-4">
+            <CustomAnimationBounceSlow>🎯</CustomAnimationBounceSlow>
+            <CustomAnimationPulseFast>⚡</CustomAnimationPulseFast>
+            <CustomAnimationWiggle>🎪</CustomAnimationWiggle>
+            <CustomAnimationFloat>🦋</CustomAnimationFloat>
+          </div>
+          <div tw="text-center mt-4">
+            <h3 tw="text-lg font-display font-bold text-primary-700">커스텀 애니메이션</h3>
+            <p tw="text-primary-600 text-sm">config에서 정의한 애니메이션들</p>
+          </div>
+        </CustomAnimationCard>
 
         {/* CSS와 Tailwind 혼합 사용 */}
-        <CssMixedCard>
-          <div tw="text-lg font-bold mb-2">CSS + Tailwind 혼합</div>
-          <div>이 카드는 CSS와 Tailwind 클래스를 함께 사용합니다.</div>
-        </CssMixedCard>
-
-        {/* CSS 키프레임 애니메이션 */}
-        <AnimatedBox>
-          <span>CSS 애니메이션</span>
-        </AnimatedBox>
-
-        {/* CSS 변수 사용 */}
-        <CssVariablesCard>
-          <div>CSS 변수를 사용한 스타일링</div>
-          <div>동적으로 색상과 크기를 조절할 수 있습니다.</div>
-        </CssVariablesCard>
-
-        {/* CSS 미디어 쿼리 */}
-        <MediaQueryCard>
-          <div>CSS 미디어 쿼리 예제</div>
-          <div>화면 크기에 따라 다른 스타일이 적용됩니다.</div>
-        </MediaQueryCard>
-
-        {/* CSS 그라디언트와 필터 */}
         <GradientFilterCard>
           <div>CSS 그라디언트 + 필터</div>
           <div>복잡한 시각적 효과를 CSS로 구현</div>
@@ -120,26 +104,6 @@ const HoverButton = tw.button`
   focus:outline-none focus:ring-4 focus:ring-purple-300
 `
 
-// 복합 스타일링 - styled 사용
-const ComplexCard = styled.div<{ variant: string }>`
-  ${tw`bg-white p-6 rounded-xl shadow-md border-l-4 hover:shadow-xl transition-all duration-300`}
-  ${props => props.variant === 'primary' 
-    ? tw`border-blue-500` 
-    : tw`border-green-500`
-  }
-`
-
-
-
-// 조건부 버튼 스타일링 - styled 사용
-const ActionButton = styled.button<{ variant?: string }>`
-  ${tw`px-4 py-2 rounded-lg font-medium transition-colors duration-200`}
-  ${props => props.variant === 'secondary'
-    ? tw`bg-gray-200 text-gray-800 hover:bg-gray-300`
-    : tw`bg-blue-500 text-white hover:bg-blue-600`
-  }
-`
-
 // 그리드 레이아웃
 const GridContainer = tw.div`
   grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4
@@ -151,169 +115,53 @@ const GridItem = tw.div`
   transition-all duration-200
   text-center font-medium
 `
-
-// 커스텀 스타일링
-const CustomStyledDiv = tw.div`
-  bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500
-  text-white p-6 rounded-2xl shadow-xl
-  flex items-center justify-center
-  transform hover:rotate-1 hover:scale-105
-  transition-all duration-500 ease-out
-  cursor-pointer
+// 커스텀 색상 팔레트
+const CustomColorPalette = tw.div`
+  bg-white p-6 rounded-2xl shadow-soft
+  border border-primary-100
 `
 
-// CSS와 Tailwind 혼합 사용
-const CssMixedCard = styled.div`
-  ${tw`bg-white p-6 rounded-xl shadow-md`}
-  ${css`
-    /* CSS로 추가 스타일링 */
-    border: 2px solid #e5e7eb;
-    position: relative;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
-      border-radius: 1rem;
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    &:hover::before {
-      opacity: 1;
-    }
-    
-    /* CSS로 복잡한 선택자 처리 */
-    & > div:first-child {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-  `}
+const ColorPrimary = tw.div`
+  w-12 h-12 rounded-lg mx-auto mb-2 shadow-inner-glow bg-primary-500
 `
 
-// CSS 키프레임 애니메이션
-const AnimatedBox = styled.div`
-  ${tw`bg-gradient-to-r from-cyan-500 to-blue-500 text-white p-6 rounded-xl shadow-lg flex items-center justify-center cursor-pointer`}
-  ${css`
-    animation: bounce 2s infinite;
-    
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-10px);
-      }
-      60% {
-        transform: translateY(-5px);
-      }
-    }
-    
-    &:hover {
-      animation: pulse 1s infinite;
-    }
-    
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
-      100% {
-        transform: scale(1);
-      }
-    }
-  `}
+const ColorSecondary = tw.div`  
+  w-12 h-12 rounded-lg mx-auto mb-2 shadow-inner-glow bg-secondary-500
 `
 
-// CSS 변수 사용
-const CssVariablesCard = styled.div`
-  ${tw`p-6 rounded-xl shadow-md`}
-  ${css`
-    --primary-color: #3b82f6;
-    --secondary-color: #10b981;
-    --card-padding: 1.5rem;
-    --border-radius: 0.75rem;
-    
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    padding: var(--card-padding);
-    border-radius: var(--border-radius);
-    
-    /* CSS 변수를 동적으로 변경할 수 있음 */
-    &:hover {
-      --primary-color: #1d4ed8;
-      --secondary-color: #059669;
-      transform: translateY(-2px);
-      transition: all 0.3s ease;
-    }
-    
-    /* CSS로 복잡한 레이아웃 */
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    
-    & > div {
-      padding: 0.5rem;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 0.5rem;
-      backdrop-filter: blur(10px);
-    }
-  `}
+const ColorBrand = tw.div`
+  w-12 h-12 rounded-lg mx-auto mb-2 shadow-inner-glow bg-brand
 `
 
-// CSS 미디어 쿼리
-const MediaQueryCard = styled.div`
-  ${tw`bg-white p-4 rounded-lg shadow-md`}
-  ${css`
-    /* 기본 스타일 (모바일) */
-    font-size: 14px;
-    text-align: center;
-    
-    /* 태블릿 */
-    @media (min-width: 768px) {
-      font-size: 16px;
-      text-align: left;
-      padding: 1.5rem;
-    }
-    
-    /* 데스크톱 */
-    @media (min-width: 1024px) {
-      font-size: 18px;
-      padding: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    
-    /* 대형 화면 */
-    @media (min-width: 1280px) {
-      font-size: 20px;
-      padding: 2.5rem;
-    }
-    
-    /* 다크 모드 지원 */
-    @media (prefers-color-scheme: dark) {
-      background: #1f2937;
-      color: #f9fafb;
-    }
-    
-    /* 인쇄 스타일 */
-    @media print {
-      background: white !important;
-      color: black !important;
-      box-shadow: none !important;
-    }
-  `}
+const ColorSuccess = tw.div`
+  w-12 h-12 rounded-lg mx-auto mb-2 shadow-inner-glow bg-success
 `
+
+// 커스텀 애니메이션 카드
+const CustomAnimationCard = tw.div`
+  bg-gradient-sunset text-white p-6 rounded-2xl shadow-soft
+  border border-secondary-200
+` 
+
+const CustomAnimationBounceSlow = tw.div`
+  bg-gradient-sunset text-white p-6 rounded-2xl shadow-soft
+  border border-secondary-200 animate-bounce-slow
+`
+
+const CustomAnimationPulseFast = tw.div`
+  bg-gradient-sunset text-white p-6 rounded-2xl shadow-soft
+  border border-secondary-200 animate-pulse-fast
+` 
+
+const CustomAnimationWiggle = tw.div`
+  bg-gradient-sunset text-white p-6 rounded-2xl shadow-soft
+  border border-secondary-200 animate-wiggle
+`
+const CustomAnimationFloat = tw.div`
+  bg-gradient-sunset text-white p-6 rounded-2xl shadow-soft
+  border border-secondary-200 animate-float
+`
+
 
 // CSS 그라디언트와 필터
 const GradientFilterCard = styled.div`
