@@ -1,4 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+
+const spacing = [...[...Array(1001).keys()]];
+
+const convertSpacing = (spacing) =>
+  [...new Set(spacing)].reduce((res, space) => {
+    res[space] = `${space}px`;
+    return res;
+  }, {});
+
+
 export default {
   content: [
     "./index.html",
@@ -47,11 +57,17 @@ export default {
         'body': ['Roboto', 'system-ui', 'sans-serif'],
         'mono': ['JetBrains Mono', 'monospace'],
       },
-      // 커스텀 스페이싱
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '128': '32rem',
+        ...convertSpacing(spacing),
+      },
+      lineHeight: {
+        ...convertSpacing(spacing),
+      },
+      borderRadius: {
+        ...convertSpacing(spacing),
+      },
+      borderWidth: {
+        ...convertSpacing(spacing),
       },
       // 커스텀 애니메이션
       animation: {

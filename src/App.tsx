@@ -71,16 +71,20 @@ function App() {
           <div>CSS 그라디언트 + 필터</div>
           <div>복잡한 시각적 효과를 CSS로 구현</div>
         </GradientFilterCard>
+
     </Wrapper>
   )
 }
-const Wrapper = tw.div`flex flex-col items-center justify-center gap-4 bg-gray-100 p-8`
+const Wrapper = tw.div`flex flex-col items-center justify-center gap-32 bg-gray-100 p-8`
 // 기본 스타일링
-const StyledDiv = tw.div`bg-red-500 text-white p-4 rounded-lg shadow-md`
+const StyledDiv = tw.div`
+  flex flex-col items-center justify-center bg-red-500 text-white p-4 rounded-lg shadow-md
+  w-100 h-100
+`
 
 // 조건부 스타일링 - styled 사용
 const ConditionalDiv = styled.div<{ isActive: boolean }>`
-  ${tw`p-4 rounded-lg transition-all duration-300`}
+  ${tw`p-32 rounded-lg transition-all duration-300`}
   ${props => props.isActive 
     ? tw`bg-green-500 text-white shadow-lg transform scale-105` 
     : tw`bg-gray-300 text-gray-600`
@@ -89,15 +93,15 @@ const ConditionalDiv = styled.div<{ isActive: boolean }>`
 
 // 반응형 디자인
 const ResponsiveCard = tw.div`
-  bg-white p-6 rounded-xl shadow-md
-  flex flex-col md:flex-row md:items-center md:space-x-4
+  bg-white p-24 rounded-xl shadow-md
+  flex flex-col md:flex-row md:items-center md:space-x-32
   hover:shadow-xl transition-shadow duration-300
 `
 
 // 호버 효과와 애니메이션
 const HoverButton = tw.button`
   bg-gradient-to-r from-purple-500 to-pink-500
-  text-white font-bold py-3 px-6 rounded-full
+  text-white font-bold py-12 px-18 rounded-full
   transform hover:scale-110 hover:rotate-2
   transition-all duration-300 ease-in-out
   shadow-lg hover:shadow-2xl
@@ -106,66 +110,66 @@ const HoverButton = tw.button`
 
 // 그리드 레이아웃
 const GridContainer = tw.div`
-  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4
+  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-32
 `
 
 const GridItem = tw.div`
-  bg-white p-4 rounded-lg shadow-md
+  bg-white p-32 rounded-lg shadow-md
   hover:bg-blue-50 hover:shadow-lg
   transition-all duration-200
   text-center font-medium
 `
 // 커스텀 색상 팔레트
 const CustomColorPalette = tw.div`
-  bg-white p-6 rounded-2xl shadow-soft
+  bg-white p-32 rounded-2xl shadow-soft
   border border-primary-100
 `
 
 const ColorPrimary = tw.div`
-  w-12 h-12 rounded-lg mx-auto mb-2 shadow-inner-glow bg-primary-500
+  w-32 h-32 rounded-lg mx-auto mb-2 shadow-inner-glow bg-primary-500
 `
 
 const ColorSecondary = tw.div`  
-  w-12 h-12 rounded-lg mx-auto mb-2 shadow-inner-glow bg-secondary-500
+  w-32 h-32 rounded-lg mx-auto mb-2 shadow-inner-glow bg-secondary-500
 `
 
 const ColorBrand = tw.div`
-  w-12 h-12 rounded-lg mx-auto mb-2 shadow-inner-glow bg-brand
+  w-32 h-32 rounded-lg mx-auto mb-2 shadow-inner-glow bg-brand
 `
 
 const ColorSuccess = tw.div`
-  w-12 h-12 rounded-lg mx-auto mb-2 shadow-inner-glow bg-success
+  w-32 h-32 rounded-lg mx-auto mb-2 shadow-inner-glow bg-success
 `
 
 // 커스텀 애니메이션 카드
 const CustomAnimationCard = tw.div`
-  bg-gradient-sunset text-white p-6 rounded-2xl shadow-soft
+  bg-gradient-sunset text-white p-32 rounded-2xl shadow-soft
   border border-secondary-200
 ` 
 
 const CustomAnimationBounceSlow = tw.div`
-  bg-gradient-sunset text-white p-6 rounded-2xl shadow-soft
+  bg-gradient-sunset text-white p-32 rounded-2xl shadow-soft
   border border-secondary-200 animate-bounce-slow
 `
 
 const CustomAnimationPulseFast = tw.div`
-  bg-gradient-sunset text-white p-6 rounded-2xl shadow-soft
+  bg-gradient-sunset text-white p-32 rounded-2xl shadow-soft
   border border-secondary-200 animate-pulse-fast
 ` 
 
 const CustomAnimationWiggle = tw.div`
-  bg-gradient-sunset text-white p-6 rounded-2xl shadow-soft
+    bg-gradient-sunset text-white p-32 rounded-2xl shadow-soft
   border border-secondary-200 animate-wiggle
 `
 const CustomAnimationFloat = tw.div`
-  bg-gradient-sunset text-white p-6 rounded-2xl shadow-soft
+  bg-gradient-sunset text-white p-32 rounded-2xl shadow-soft
   border border-secondary-200 animate-float
 `
 
 
 // CSS 그라디언트와 필터
 const GradientFilterCard = styled.div`
-  ${tw`p-6 rounded-xl shadow-xl flex flex-col items-center justify-center text-white`}
+  ${tw`p-32 rounded-xl shadow-xl flex flex-col items-center justify-center text-white`}
   ${css`
     background: linear-gradient(
       45deg,
